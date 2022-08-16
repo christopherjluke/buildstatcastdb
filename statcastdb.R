@@ -203,7 +203,7 @@ map(.x = seq(2015, 2022, 1),
                        host = "localhost",
                        port = 5432)
                        
-    message('Baseball fans it's time to get up and stretch...')
+    message("Baseball fans it's time to get up and stretch...")
     
     Sys.sleep(5*60)
     
