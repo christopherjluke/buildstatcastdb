@@ -147,7 +147,7 @@ delete_and_upload <- function(df,
                            user = user, 
                            password = password,
                            host = host, 
-                           port = posrt)
+                           port = port)
   
   query <- paste0('DELETE from statcast where game_year = ', year)
   
