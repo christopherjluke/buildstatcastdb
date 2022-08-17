@@ -137,7 +137,7 @@ delete_and_upload <- function(df,
                               dbname, 
                               user, 
                               password, 
-                              host = 'local_host', 
+                              host = 'localhost', 
                               port = 5432) {
   
   pg <- dbDriver(db_driver)
@@ -172,14 +172,18 @@ df <- as.data.frame(df)
 
 dbWriteTable(statcast_db, "statcast", df, overwrite=TRUE)
 
+# Check to see if it worked
+
 tbl(statcast_db, 'statcast') %>%
   filter(game_year == 2015) %>%
   count()
 
-map(.x = seq(2015, 2022, 1),
+# Build rest of the database
+map(.x = seq(2016, 2022, 1),
     ~{payload_statcast <- annual_statcast_query(season = .x)
     message(paste0('Formatting payload for ', .x, '...'))
     df <- format_append_statcast(df = payload_statcast)
+    df <- as.data.frame(df)
     message(paste0('Deleting and uploading ', .x, ' data to database...'))
     delete_and_upload(df,
                       year = .x,
