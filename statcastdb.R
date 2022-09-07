@@ -187,26 +187,23 @@ map(.x = seq(2016, 2022, 1),
     message(paste0('Deleting and uploading ', .x, ' data to database...'))
     delete_and_upload(df,
                       year = .x,
-                      db_driver = 'MySQL',
                       dbname = 'statcast',
+                      db_driver = "MySQL", 
                       user = <username>,
-                      password = <server_password>,
+                      password = <password>,
                       host = 'localhost',
                       port = 5432)
+
+    
     statcast_db <- DBI::dbConnect(RMySQL::MySQL(),
                                   dbname = "statcast",
-                                  user = <username>,
-                                  password = <server_password>,
-                                  host = "localhost",
+                                  user = "root",
+                                  password = <username>,
+                                  host = <password>,
                                   port = 5432)
     dbGetQuery(statcast_db, 'select game_year, count(game_year) from statcast group by game_year')
-    DBI::dbDisconnect(RMySQL::MySQL(),
-                       dbname = "statcast",
-                       user = <username>,
-                       password = <server_password>,
-                       host = "localhost",
-                       port = 5432)
-                       
+    DBI::dbDisconnect(statcast_db)
+    
     message("Baseball fans it's time to get up and stretch...")
     
     Sys.sleep(5*60)
