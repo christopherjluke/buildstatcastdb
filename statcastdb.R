@@ -169,7 +169,7 @@ statcast_db <- DBI::dbConnect(RMySQL::MySQL(),
                               port = 5432)
 
 df <- as.data.frame(df)
-
+dbSendQuery(statcast_db, "SET GLOBAL local_infile = true;")
 dbWriteTable(statcast_db, "statcast", df, overwrite=TRUE)
 
 # Check to see if it worked
@@ -189,8 +189,8 @@ map(.x = seq(2016, 2022, 1),
                       year = .x,
                       db_driver = 'MySQL',
                       dbname = 'statcast',
-                      user = 'root',
-                      password = 'Wasspord143!',
+                      user = <username>,
+                      password = <server_password>,
                       host = 'local_host',
                       port = 5432)
     statcast_db <- DBI::dbConnect(RMySQL::MySQL(),
