@@ -191,7 +191,7 @@ map(.x = seq(2016, 2022, 1),
                       dbname = 'statcast',
                       user = <username>,
                       password = <server_password>,
-                      host = 'local_host',
+                      host = 'localhost',
                       port = 5432)
     statcast_db <- DBI::dbConnect(RMySQL::MySQL(),
                                   dbname = "statcast",
